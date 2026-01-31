@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let total = +prompt("Hôm nay có bao nhiêu lượt trả sách");
+        let lateCount = 0;
+
+        for( let i = 1 ; i<= total; i++){
+            let user = prompt(`Lượt ${i}: Nhập tên người trả`);
+            let bookName = prompt(`Lượt ${i}: Nhập tên sách`);
+
+            let borrowDays;
+            while (true){
+                borrowDays = +prompt(`Nhập số ngày dã mượn thực tế cho cuốnn ${bookName} (phải >=1)`);
+                if (!isNaN(borrowDays) && borrowDays >= 1){
+                    break;
+                }
+                let status;
+                let penalty = "";
+                if (borrowDays <= 14){
+                    status ="Trả đúng hạn";
+                }else if(borrowDays <= 21){
+                    status = "Trả muộn nhẹ";
+                    penalty = " - Phạt nhắc nhở";
+                    lateCount++;
+                }else{
+                    status = "Quá hạn nghiệm trọng";
+                    penalty = "- Cần ghi biên bản phạt";
+                    lateCount++;
+                }
+                let resultMsg = `Người trả ${user} | Sách ${bookName} | Tình trạng: ${status}${penalty}`;
+
+                alert(resultMsg);
+                console.log(resultMsg);
+            }
+            console.log("---- Thống kê ----");
+            console.log(`Tổng số lượt trả sách : ${total}`);
+            console.log(`Số lượt trả muộn : ${lateCount}`);
+        }
+    </script>
+</body>
+</html>
