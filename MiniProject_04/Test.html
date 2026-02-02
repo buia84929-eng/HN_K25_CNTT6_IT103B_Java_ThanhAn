@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let N = +prompt("Nhập vào một số nguyên");
+        if( N % 2 == 0){
+            console.log(`Số ${N} là số chẵn`);
+        }else{
+            console.log(`Số ${N} là số lẻ`);
+        }
+
+        if (N < 0){
+            console.log(`Số ${N} là số âm`);
+            console.log("Giá trị nhập không hợp lệ");
+        }else if(N > 0){
+            console.log(`Số ${N} là số dương`);
+            for( let i = 0; i<= N; i++){
+                console.log(i);
+            }
+        }else{
+            console.log(`Số ${N} bằng 0`);
+            console.log("Giá trị nhập không hợp lệ");
+        }
+
+        let Sum = 0;
+        console.log("");
+        for( let j = 1; j < 51; j++){
+            if ( j  % 3 == 0 && j % 5 == 0){
+                console.log("FizzBuzz");
+            }else if ( j % 5 == 0){
+                console.log("Buzz");
+            }else if ( j % 3 == 0){
+                console.log("Fizz");
+                Sum += j;
+            }else{
+                console.log(`${j}`);
+            }
+        }
+        console.log(`Tổng bằng ${Sum}`);
+    </script>
+</body>
+</html>
