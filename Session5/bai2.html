@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let borrowedList = [];
+        let quantity = +prompt("Hôm nay có bao nhiêu cuốn sách bị trả muộn?");
+
+        if (isNaN(quantity) || quantity <= 0) {
+            console.log("Vui lòng nhập một số nguyên dương hợp lệ");
+        } else {
+            for (let i = 1; i <= quantity; i++) {
+                let bookName = prompt(`Nhập tên cuốn sách bị trả muộn thứ ${i}`);
+                borrowedList.push(bookName);
+            }
+
+            console.log(`Tổng số sách bị trả muộn: ${borrowedList.length}`);
+            console.log("Danh sách sách bị trả muộn:");
+
+            borrowedList.forEach((book, index) => {
+                console.log(`${index + 1}.${book} `);
+            });
+
+            let longTitledBook = 0;
+            for (let i = 0; i < borrowedList.length; i++) {
+                if (borrowedList[i].length > 20) {
+                    longTitledBook++;
+                }
+            }
+            
+            console.log(`Số lượng sách có tên dài hơn 20 ký tự : ${longTitledBook}`);
+        }
+    </script>
+</body>
+</html>
