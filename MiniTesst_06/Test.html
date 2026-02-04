@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let name = prompt("Nhập các tên và cách nhau bằng dấu ,");
+        let str = ["Nam, Lan, Hùng, Nam"];
+
+        let students = str.split(", ");
+        students.reverse();
+
+        if (students.includes("Lan")) {
+            console.log("Lan tồn tại trong mảng");
+        } else {
+            console.log("Lan không tồn tại trong mảng");
+        }
+
+        console.log(students.indexOf("Nam"));
+
+    </script>
+</body>
+</html>
