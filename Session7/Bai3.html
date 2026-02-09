@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let players = [];
+        let positionsList = ["", "Thủ môn", "Hậu vệ", "Tiền vệ", "Tiền đạo"];
+
+        let n = parseInt(prompt("Có bao nhiêu cầu thủ cần nhập vào đội bóng?"));
+
+        for (let i = 0; i < n; i++) {
+            let id;
+            while (true) {
+                id = prompt(`Nhập mã cầu thủ thứ ${i + 1}:`);
+                let isDuplicate = false;
+                for (let j = 0; j < players.length; j++) {
+                    if (players[j].split("-")[0] === id) {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+                if (isDuplicate) {
+                    alert("Mã này đã tồn tại! Vui lòng nhập lại.");
+                } else {
+                    break;
+                }
+            }
+
+            let name;
+            while (true) {
+                name = prompt(`Nhập tên cầu thủ thứ ${i + 1}:`);
+                if (name.trim() !== "") {
+                    break;
+                }
+                alert("Tên không được để trống!");
+            }
+
+            let posChoice = parseInt(prompt("Vị trí (1: Thủ môn, 2: Hậu vệ, 3: Tiền vệ, 4: Tiền đạo):"));
+            let posName = positionsList[posChoice];
+
+            let playerString = id + "-" + name + "-" + posName;
+            players.push(playerString);
+        }
+
+        function printTeamRoster() {
+            console.log("\n--- DANH SÁCH ĐỘI BÓNG ---");
+            for (let i = 0; i < players.length; i++) {
+                let info = players[i].split("-");
+                console.log(`${i + 1}. Mã: ${info[0]} | Tên: ${info[1]} | Vị trí: ${info[2]}`);
+            }
+        }
+
+        function pushPlayer(name, position) {
+            let nextIndex = players.length + 1;
+            let newId = "P" + nextIndex.toString().padStart(3, '0');
+            let playerString = newId + "-" + name + "-" + position;
+            players.push(playerString);
+            console.log(`=> Đã thêm cầu thủ mới: ${playerString}`);
+        }
+
+        printTeamRoster();
+    </script>
+</body>
+</html>

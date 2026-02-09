@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let playerId = [];
+        let playerPositions = [];
+
+        let POSITION_NAMES = ["","Thủ môn","Hậu vệ","Tiền vệ","Tiền đạo"];
+
+        let n = +prompt("Có bao nhiêu cầu thủ cần nhập vào đội bóng?");
+
+        for (let i = 0; i < n; i++){
+            console.log(`Nhậo cầu thủ {i+1}:`);
+
+            let id;
+            while(true){
+                id = prompt(`Nhập mã cầu thủ thứ {i+1}`);
+                if(playerId.indexOf(id) !== -1){
+                    alert("Mã này đã tồn tại. Vui lòng nhập ,mã khác");
+                }else{
+                    playerId.push(id);
+                    break;
+                }
+            }
+            let posChoice = +prompt("Vị trí ( 1: Thủ môn, 2: Hậu vệ, 3: Tiền vệ, 4: Tiền đạo):");
+            playerPositions.push(POSITION_NAMES[posChoice]);
+        }
+
+        function findPlayerByPosition(name){
+            let result = [];
+            for(let i =0; i < playerPositions.length; i++){
+                if(playerPositions[i] === name){
+                    result.push(i);
+                }
+            }
+            return result;
+        }
+
+        let searchNum = +prompt("Nhập vị trí muốn đếm (1-4):");
+        let searchName = POSITION_NAMES[searchNum];
+
+        printTeamRoster();
+
+        let foundIndices = findPlayersByPosition(searchName);
+        console.log(`Số cầu thủ ở vị trí ${searchName}: ${foundIndices}`);
+        console.log(`Cấc chỉ số cầu thủ ở vị trí ${searchName}: ${foundIndices.join(", ")}`);
+    </script>
+</body>
+</html>
