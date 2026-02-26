@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản Lý Kho Hàng</title>
+</head>
+<body>
+    <script>
+        let products = [
+            { name: "iPhone 15", price: 1200, stock: 10 },
+            { name: "Samsung S23", price: 900, stock: 5 },
+            { name: "Oppo Reno", price: 450, stock: 0 },
+            { name: "Xiaomi 13", price: 600, stock: 8 },
+            { name: "Nokia C20", price: 80, stock: 15 }
+        ];
+
+        while (true) {
+            let choice = prompt(`--- HỆ THỐNG QUẢN LÝ KHO HÀNG ---
+            1. Lọc sản phẩm cao cấp (>500)
+            2. Kiểm định trạng thái dữ liệu
+            3. Phân tích giá trị vốn hóa
+            4. Triển khai chiết khấu (10%)
+            5. Truy vấn theo từ khóa
+            6. Báo cáo tồn kho
+            7. Thoát`);
+
+            if (choice === "7" || choice === null) break;
+
+            switch (choice) {
+                case "1":
+                    let highValue = products
+                        .filter(p => p.price > 500)
+                        .map(p => p.name);
+                    alert("Sản phẩm >500: " + highValue.join(", "));
+                    break;'3'
+
+                case "2":
+                    let outOfStock = products.some(p => p.stock === 0);
+                    let minPrice = products.every(p => p.price > 100);
+                    alert(`Hết hàng: ${outOfStock}\nGiá > 100: ${minPrice}`);
+                    break;
+
+                case "3":
+                    let total = products.reduce((sum, p) => sum + (p.price * p.stock), 0);
+                    alert(`Tổng vốn hóa: ${total.toLocaleString()} USD`);
+                    break;
+
+                case "4":
+                    products.forEach(p => p.price *= 0.9);
+                    alert("Đã giảm giá 10%!");
+                    break;
+
+                case "5":
+                    let key = prompt("Từ khóa:").toLowerCase();
+                    let found = products
+                        .filter(p => p.name.toLowerCase().includes(key))
+                        .map(p => `${p.name} ($${p.price})`);
+                    alert(found.length ? found.join("\n") : "Không thấy");
+                    break;
+
+                case "6":
+                    let report = products.map(p => `${p.name}: ${p.stock > 0 ? "Còn" : "Hết"} (${p.stock})`);
+                    alert(report.join("\n"));
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

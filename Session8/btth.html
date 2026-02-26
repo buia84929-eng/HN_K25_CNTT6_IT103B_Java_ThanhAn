@@ -21,7 +21,7 @@
             squad.forEach(player => {
                 result += `${player[0]} (${player[2]}): ${player[1]} bàn thắng\n`;
             });
-            alert(result);
+            console.log(result);
         };
 
         let findSearch = function() {
@@ -29,9 +29,9 @@
             let found = squad.find(player => player[0].toLowerCase().includes(searchName.toLowerCase()));
             
             if (found) {
-                alert(`Tìm thấy: ${found[0]} | Vị trí: ${found[2]} | Bàn thắng: ${found[1]}`);
+                console.log(`Tìm thấy: ${found[0]} | Vị trí: ${found[2]} | Bàn thắng: ${found[1]}`);
             } else {
-                alert("Không tìm thấy cầu thủ này trong danh sách!");
+                console.log("Không tìm thấy cầu thủ này trong danh sách!");
             }
         };
 
@@ -42,15 +42,15 @@
             if (filtered.length > 0) {
                 let result = `=> KẾT QUẢ LỌC VỊ TRÍ ${pos}:\n`;
                 filtered.forEach(p => result += `- ${p[0]} (${p[1]} bàn)\n`);
-                alert(result);
+                console.log(result);
             } else {
-                alert("Không có cầu thủ nào ở vị trí này.");
+                console.log("Không có cầu thủ nào ở vị trí này.");
             }
         };
 
         let calcTotalGoals = function() {
             let total = squad.reduce((sum, player) => sum + player[1], 0);
-            alert(`=> Tổng số bàn thắng hiện tại là: ${total} bàn.`);
+            console.log(`=> Tổng số bàn thắng hiện tại là: ${total} bàn.`);
         };
 
         let checkPerformance = function() {
@@ -72,7 +72,7 @@
             msg += "- Không phải tất cả cầu thủ đều đã ghi bàn.";
         }
         
-        alert(msg);
+        console.log(msg);
         };
 
         let main = function() {
