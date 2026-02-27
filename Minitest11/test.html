@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let students = [
+            { id: 1, name: "Nguyen Văn A", score: 8.5, gender: "Nam" },
+            { id: 2, name: "Tran Thi B", score: 4.2, gender: "Nu" },
+            { id: 3, name: "Lê Văn C", score: 9.0, gender: "Nam" },
+            { id: 4, name: "Phạm Thị D", score: 5.5, gender: "Nữ" },
+            { id: 5, name: "Hoang Văn E", score: 3.8, gender: "Nam" }
+        ];
+        function newStudents(list){
+            const result = list.filter(student => student.score >= 8.0);
+            console.log(result);
+            return result;
+        }
+        function newClass(list){
+            const classNew = list.some(student => student.score < 4.0);
+            const stu = classNew ? " có sinh viên yếu" : "Không có sinh viên yếu";
+            console.log(stu);
+            return stu;
+        }
+        newStudents(students);
+        newClass(students);
+    </script>
+</body>
+</html>
