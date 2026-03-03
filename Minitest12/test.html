@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let students = [
+            { id: 1, name: "Nguyen Van A", score: 8.5, gender: "Nam" },
+            { id: 2, name: "Tran Thi B", score: 4.2, gender: "No" },
+            { id: 3, name: "Lê Van C", score: 9.0, gender: "Nam" },
+            { id: 4, name: "Pham Thi D", score: 5.5, gender: "Nu" },
+            { id: 5, name: "Hoang Van E", score: 3.8, gender: "Nam" }
+            ];
+
+            let newStudent = students.filter(student => student.gender === "Nu");
+            students.sort((stuA,stuB) => stuB.score - stuA.score);
+            console.log("Danh sách các sinh viên Nữ có điểm giảm dần là",newStudent);
+
+            let studentName = students.filter( student => student.score >= 5.0);
+            students.map(student => student.name);
+            console.log("Họ và tên sinh viên đạt yêu cầu là",studentName);
+
+            let sum = students.reduce((acc, curr) => acc + curr.score, 0 );
+            console.log("Điểm trung bình của nhóm sinh viên nam là",sum);
+    </script>
+</body>
+</html>
