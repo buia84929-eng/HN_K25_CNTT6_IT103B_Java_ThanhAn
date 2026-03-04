@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" class="name-label" id="inputForm">
+        <h3 onclick="handleClick()"> Input form</h3>
+        <label for="fullName" class="name-label"> Họ và tên</label>
+        <input type="text" id="fullName">
+        <br>
+        <input type="submit" value ="Submit" class ="submit-btn">
+    </form>
+    <script>
+        function handleClick(){
+            let input = document.getElementById("fullName");
+            h3.classList.toggle("bg-blue");
+        }
+        let h3 = document.getElementsByTagName("h3")[0];
+        // h3.onclick = handleClick();    cách 2
+
+        h3.addEventListener("click", (e)=>{
+            console.log(e.target);
+        });
+        
+        let input = document.getElementById("fullName");
+        let inputValue;
+        input.addEventListener("change", ()=>{
+            inputValue = inputElement.value;
+            // console.log(input.value);
+        })
+
+        let form = document.getElementById("inputForm");
+        form.addEventListener("submit", (e) =>{
+            e.preventDefault();  // ngăn chặn mặc định
+        })
+    </script>
+</body>
+</html>
