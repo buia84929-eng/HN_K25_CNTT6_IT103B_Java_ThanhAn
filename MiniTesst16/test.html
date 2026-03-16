@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>📝 Todo List</h1>
+
+      <div class="input-row">
+        <input type="text" id="taskInput" placeholder="Nhập công việc..." />
+        <button>Thêm</button>
+      </div>
+
+      <ul id="taskList">
+        <li>Quét nhà</li>
+        <li>Giặt quần áo</li>
+      </ul>
+    </div>
+    <script>
+        let list = [
+            {name :"JavaScript"},
+            {name :"DevC"},
+            {name :"CSS"}
+        ];
+        const taskInput = document.getElementById("taskInput");
+        const taskList = document.getElementById("taskList");
+        function renderTask(){
+            taskList.innerHTML ="";
+            list.forEach((item) => {
+                console.log(item.name);
+            });
+        }
+        
+        function addTask(){
+            const taskValue = taskInput.value.trim();
+            if(taskValue === ""){
+                alert("Vui lòng nhập tên công việc");
+                return;
+            }
+            renderTask();
+        }
+        renderTask();
+    </script>
+  </body>
+</html>
