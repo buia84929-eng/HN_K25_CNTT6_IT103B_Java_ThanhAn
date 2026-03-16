@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #fdf5e6;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .box {
+            background: white;
+            width: 450px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #d32f2f;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .input-area {
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #ffa000;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .list {
+            padding: 0 20px 20px 20px;
+        }
+
+        .item {
+            border: 1px solid #ffd700;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .item.done {
+            background-color: #e8f5e9;
+            border-color: #4caf50;
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .circle {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item.done .circle {
+            background: #4caf50;
+            border-color: #4caf50;
+        }
+
+        .item.done .circle::after {
+            content: "✓";
+            color: white;
+            font-size: 14px;
+        }
+
+        .footer {
+            padding: 15px;
+            text-align: center;
+            color: #888;
+            font-size: 11px;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+    </head>
+
+    <body>
+        <div class="box">
+            <div class="header">
+                <h2>Công việc chuẩn bị Tết</h2>
+                <p>Thêm công việc mới & đánh dấu hoàn thành</p>
+            </div>
+
+            <div class="input-area">
+                <input type="text" id="task-input" placeholder="Nhập công việc mới...">
+                <button onclick="addTask()">Thêm</button>
+            </div>
+
+            <div class="list" id="todo-list"></div>
+
+            <div class="footer">Mọi thay đổi được lưu tự động vào localStorage</div>
+        </div>
+
+        <script>
+            let myData = [];
+
+            function render() {
+                const listArea = document.getElementById("todo-list");
+                let html = "";
+                for (let i = 0; i < myData.length; i++) {
+                    let classDone = myData[i].done ? "done" : "";
+                    html += `
+                    <div class="item ${classDone}" onclick="toggleDone(${i})">
+                        <div class="circle"></div>
+                        <span>${myData[i].task}</span>
+                    </div>
+                `;
+                }
+                listArea.innerHTML = html;
+            }
+            // llấyndung vừa gõ vào input
+            function addTask() {
+                const input = document.getElementById("task-input");
+                const value = input.value.trim();
+                if (value == "") return; // ktra nếu k gõ gì thì dừng lại 
+
+                // nó tạo đối tượng mới để nhét push vào mảng myData
+                const newItem = { id: Date.now(), task: value, done: false };
+                myData.push(newItem);
+                localStorage.setItem("myTodos", JSON.stringify(myData));
+                input.value = "";
+                render();
+            }
+            // dùng chỉ số index để biết là dg bấm vào dòng bao nhiêu
+            function toggleDone(index) {
+                myData[index].done = !myData[index].done; // lấy gtri của done đổi ngược từ false thành true rồi ngược lại
+                localStorage.setItem("myTodos", JSON.stringify(myData));  // lưu
+                render();
+            }
+            // khởi tạo 
+            window.onload = function () {
+                const savedData = localStorage.getItem("myTodos");
+                if (savedData != null) {
+                    myData = JSON.parse(savedData);
+                }
+                render();
+            };
+        </script>
+    </body>
+
+</html>

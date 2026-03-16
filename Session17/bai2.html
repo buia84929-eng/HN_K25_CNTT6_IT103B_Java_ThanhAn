@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #fdf5e6;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .box {
+            background: white;
+            width: 450px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #d32f2f;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .list {
+            padding: 20px;
+        }
+
+        .item {
+            border: 1px solid #ffd700;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .item.done {
+            background-color: #e8f5e9;
+            border-color: #4caf50;
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .circle {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item.done .circle {
+            background: #4caf50;
+            border-color: #4caf50;
+        }
+
+        .item.done .circle::after {
+            content: "✓";
+            color: white;
+            font-size: 14px;
+        }
+
+        .footer {
+            padding: 15px;
+            text-align: center;
+            color: #888;
+            font-size: 11px;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="header">
+            <h2>Công việc chuẩn bị Tết</h2>
+            <p style="font-size: 12px; opacity: 0.8;">Click để đánh dấu hoàn thành</p>
+        </div>
+
+        <div class="list" id="todo-list"></div>
+
+        <div class="footer">
+            Trạng thái được lưu tự động vào localStorage • Refresh để kiểm tra
+        </div>
+    </div>
+
+    <script>
+        const initialTodos = [
+            { id: 1, task: "Mua bánh chưng", done: false },
+            { id: 2, task: "Dọn nhà đón Tết", done: false },
+            { id: 3, task: "Gói bánh chưng", done: false },
+            { id: 4, task: "Trang trí nhà cửa bằng hoa mai, hoa đào", done: false },
+            { id: 5, task: "Mua phong bao lì xì", done: false },
+            { id: 6, task: "Chuẩn bị mâm ngũ quả", done: false }
+        ];
+        let myData = [];
+        // sau khi mà có dsach myDate thì gọi hàm render
+        function render() {
+            const listArea = document.getElementById("todo-list");
+            let html = "";
+
+            for (let i = 0; i < myData.length; i++) {
+                let classDone = "";
+                //nếu done là true thì thêm nhãn class done vào html để gạch ngang chữ. nếu là false thì giữ nguyên
+                if (myData[i].done == true) {
+                    classDone = "done";
+                }
+                // chèn tất cả html vừa tạo vào todo-list
+                html += `
+                    <div class="item ${classDone}" onclick="toggleDone(${i})">
+                        <div class="circle"></div>
+                        <span>${myData[i].task}</span>
+                    </div>
+                `;
+            }
+            listArea.innerHTML = html;
+        }
+        // truyền vào 1so index
+        function toggleDone(index) { // ktra 
+            if (myData[index].done == false) { // nếu false thì đổi thành true và ngược lại
+                myData[index].done = true;
+            } else {
+                myData[index].done = false;
+            }
+            // mảng đã thay đổi nên dùng localStorage để câhp nhật lại
+            localStorage.setItem("myTodos", JSON.stringify(myData));
+            render();
+        }
+       
+        window.onload = function () {
+            const savedData = localStorage.getItem("myTodos");
+
+            if (savedData == null) {
+                myData = initialTodos; // gán để lấy dsach mặc định
+                localStorage.setItem("myTodos", JSON.stringify(myData)); // sau đó lưu lại
+            } else {
+                myData = JSON.parse(savedData); // rồi dùng JSON đeer biến chuỗi thành mảng rồi gán lại vào myData
+            }
+
+            render();
+        };
+    </script>
+</body>
+
+</html>

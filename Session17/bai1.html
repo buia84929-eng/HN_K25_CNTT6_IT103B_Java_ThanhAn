@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            background: #fdf5e6; 
+            display: flex; 
+            justify-content: center; 
+            padding: 20px; 
+        }
+        .box { 
+            background: white; 
+            width: 400px; 
+            border-radius: 10px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+            overflow: hidden; 
+        }
+        .header { 
+            background: #d32f2f;
+            color: white; 
+            text-align: center; 
+            padding: 15px; 
+        }
+        .list { 
+            padding: 20px; 
+        }
+        .item { 
+            border: 1px solid #ffd700; 
+            padding: 12px; 
+            margin-bottom: 10px; 
+            border-radius: 20px; 
+            display: flex; 
+            justify-content: space-between; 
+        }
+        .footer { 
+            padding: 10px; 
+            text-align: center; 
+            color: #888; 
+            font-size: 13px; 
+            border-top: 1px solid #eee; 
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="header">
+            <h2>Chuẩn bị Tết Nguyên Đán</h2>
+            <p>Danh sách việc cần làm</p>
+        </div>
+        <div class="list" id="display"></div>
+        <div class="footer" id="message"></div>
+    </div>
+    <script>
+        // chuẩn bị danh sách
+        const todos = [
+            { id: 1, task: "Mua banh chung", done: false },
+            { id: 2, task: "Dọn nhà đón Tết", done: false },
+            { id: 3, task: "Gói bánh chưng", done: false },
+            { id: 4, task: "Trang trí nhà cửa", done: false },
+        ];
+        const display = document.getElementById("display");
+        const message = document.getElementById("message");
+
+        function render(){
+            let content = "";
+            // chạy for món trong dsach todos thì tạo ra 1 thẻ div
+            for (let i = 0; i < todos.length; i++){
+                content += `
+                <div class="item">
+                    <span>🌸 ${todos[i].task}</span>
+                    <small>Chưa làm</small>
+                    </div>
+                `;
+            }
+            display.innerHTML = content; // xong dán các thẻ vào vùng có id là display để nhìn thấy
+        };
+        window.onload = function(){
+            render ();
+            // lệnh localStorage để kiểm tra xem có myTodos chưa
+            const data = localStorage.getItem("myTodos");
+            // nếu k có null thì lấy dsach todos rồi dùng lệnh JSON để thành 1 chuỗi văn bản sau đó dùng setItem để cất đi
+            if(data === null){
+                localStorage.setItem("myTodos", JSON.stringify(todos));
+                message.innerText("Đã lưu vào localStorage lần đầu tiên");
+            }else{
+                message.innerText = "Refresh trang để kiểm tra"; // nếu có rồi thì thôi
+            }
+        };
+    </script>
+</body>
+
+</html>
